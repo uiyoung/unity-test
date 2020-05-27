@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             timerText.text = "TIME : " + (int)surviveTime;
 
             levelUpTimer += Time.deltaTime;
-            if (levelUpTimer >= 3)
+            if (levelUpTimer >= 2)
             {
                 levelUpTimer = 0;
                 LevelUp();

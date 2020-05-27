@@ -17,10 +17,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float xAxis = Input.GetAxis("Horizontal");
-        float zAxis = Input.GetAxis("Vertical");
+        float xInput = Input.GetAxis("Horizontal");
+        float zInput = Input.GetAxis("Vertical");
 
-        rb.velocity = new Vector3(xAxis * speed, 0, zAxis * speed);
+        rb.velocity = new Vector3(xInput * speed, 0, zInput * speed);
     }
 
     public void SetDamage()
