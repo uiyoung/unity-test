@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject spawnerPrefab;
+    public Transform level;
+
     public GameObject player;
     public Text timerText;
     public Text recordText;
@@ -40,10 +43,12 @@ public class GameManager : MonoBehaviour
 
     private void LevelUp()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            FindObjectsOfType<BulletSpawner>()[i].spawnRateMax -= 0.1f;
-        }
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    FindObjectsOfType<BulletSpawner>()[i].spawnRateMax -= 0.1f;
+        //}
+
+        Instantiate(spawnerPrefab, new Vector3(Random.Range(-9, 9), 1, Random.Range(-9, 9)), Quaternion.Euler(0, 0, 0), level);
     }
 
     public void EndGame()

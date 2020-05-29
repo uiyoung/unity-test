@@ -243,6 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4635f330c8a1a844f93e7a4b6bd58ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnerPrefab: {fileID: 4720585310266821281, guid: 8c313a0a36b17fa46b6db1a4ec59f404,
+    type: 3}
+  level: {fileID: 28060648}
   player: {fileID: 1996416315}
   timerText: {fileID: 1496308682}
   recordText: {fileID: 1013518374}
@@ -890,13 +893,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.66915274, y: -0.1475352, z: 0.54119235, w: 0.48742068}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 125.707, y: -455.99298, z: -394.44598}
 --- !u!1 &771270305
 GameObject:
   m_ObjectHideFlags: 0

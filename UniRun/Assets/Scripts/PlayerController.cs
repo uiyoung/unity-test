@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioClip[] audioClips;
+
     private Rigidbody2D rb;
     private Animator anim;
-    public AudioClip[] audioClips;
     private AudioSource audioSource;
     private float jumpPower = 600f;
     private bool isGrounded = false;
@@ -33,15 +34,13 @@ public class PlayerController : MonoBehaviour
             audioSource.Play();
             jumpCount++;
         }
-
-        if (Input.GetMouseButtonUp(0) && rb.velocity.y > 0)
+        else if (Input.GetMouseButtonUp(0) && rb.velocity.y > 0)
         {
             rb.velocity *= 0.5f;
         }
 
         anim.SetBool("Grounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
-        Debug.Log(isGrounded);
     }
 
     private void Die()
