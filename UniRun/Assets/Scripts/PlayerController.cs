@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         if (isDead)
             return;
 
-        if (Input.GetMouseButtonDown(0) && jumpCount < 2)
+        if (Input.GetButtonDown("Fire1") && jumpCount < 2)
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpPower);
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             audioSource.Play();
             jumpCount++;
         }
-        else if (Input.GetMouseButtonUp(0) && rb.velocity.y > 0)
+        else if (Input.GetButtonUp("Fire1") && rb.velocity.y > 0)
         {
             rb.velocity *= 0.5f;
         }
