@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     private float jumpPower = 600f;
     private bool isGrounded = false;
-    private bool isDead = false;
+    public bool isDead = false;
     private int jumpCount = 0;
 
     void Start()
