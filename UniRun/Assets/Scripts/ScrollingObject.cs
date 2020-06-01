@@ -5,14 +5,10 @@ using UnityEngine;
 public class ScrollingObject : MonoBehaviour
 {
     private float speed = 10f;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
-        
+        if(!GameManager.instance.isGameOver)
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 }

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
-    public GameObject txtGameOver;
 
-    private bool isGameOver = false;
-    private int score;
-    private PlayerController playerController;
+    public bool isGameOver = false;
+    public GameObject UIGameOver;
+    public Text txtScore;
 
+    private int score = 0;
 
     private void Awake()
     {
@@ -22,27 +22,24 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    void Start()
-    {
-        playerController = FindObjectOfType<PlayerController>();
-        
-    }
-
     void Update()
     {
-        if (playerController.isDead)
-            isGameOver = true;
+        if (isGameOver && Input.GetButtonDown("Fire1"))
+            SceneManager.LoadScene("Main");
+    }
 
-
-
-
-        if(isGameOver)
+    public void AddScore(int newScore)
+    {
+        if (!isGameOver)
         {
-            txtGameOver.SetActive(true);
-
-            if (Input.GetKeyDown("Fire1"))
-                SceneManager.LoadScene("Main");
+            score += newScore;
+            txtScore.text = "SCORE : " + score;
         }
+    }
 
+    public void OnPlayerDead()
+    {
+        isGameOver = true;
+        UIGameOver.SetActive(true);
     }
 }
