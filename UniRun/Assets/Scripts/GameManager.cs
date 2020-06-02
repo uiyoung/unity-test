@@ -10,9 +10,10 @@ public class GameManager : MonoBehaviour
 
     public bool isGameOver = false;
     public GameObject UIGameOver;
+    public GameObject UIGameEnd;
     public Text txtScore;
 
-    private int score = 0;
+    public int score = 0;
 
     private void Awake()
     {
@@ -41,5 +42,11 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         UIGameOver.SetActive(true);
+    }
+
+    public void OnPlayerEnd()
+    {
+        isGameOver = true;
+        UIGameEnd.SetActive(true);
     }
 }

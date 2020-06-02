@@ -56,10 +56,24 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.OnPlayerDead();
     }
 
+    private void Ending()
+    {
+        rb.velocity = Vector2.zero;
+        isDead = true;
+
+        anim.SetTrigger("End");
+        audioSource.clip = audioClips[2];
+        audioSource.Play();
+
+        GameManager.instance.OnPlayerEnd();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isDead && collision.tag == "Dead")
             Die();
+        else if (collision.tag == "Finish")
+            Ending();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
