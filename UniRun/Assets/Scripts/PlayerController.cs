@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             jumpCount = 0;
         }
-        GameManager.instance.AddScore(10);
     }
 
     private void OnCollisionExit2D(Collision2D collision)

@@ -1,0 +1,105 @@
+[1mdiff --git a/UniRun/Assets/Scripts/PlatformSpawner.cs b/UniRun/Assets/Scripts/PlatformSpawner.cs[m
+[1mindex 2ac4bea..f20c570 100644[m
+[1m--- a/UniRun/Assets/Scripts/PlatformSpawner.cs[m
+[1m+++ b/UniRun/Assets/Scripts/PlatformSpawner.cs[m
+[36m@@ -6,21 +6,17 @@[m [mpublic class PlatformSpawner : MonoBehaviour[m
+ {[m
+     public GameObject platformPrefab;[m
+     private GameObject[] platforms;[m
+[31m-[m
+[31m-    public GameObject finishPlatformPrefab;[m
+[31m-[m
+     private int platformCount = 4;[m
+[31m-[m
+     private int currentIndex = 0;[m
+ [m
+[32m+[m[32m    public GameObject finishPlatformPrefab;[m
+[32m+[m
+     private float minSpawnTime = 1f;[m
+     private float maxSpawnTime = 1.8f;[m
+[31m-    private float nextSpawnTime;    // 다음 생성 시간(min값~max값 사이의 랜덤)[m
+[31m-[m
+[32m+[m[32m    private float nextSpawnTime;    // 다음 생성 시간(min~max 사이의 랜덤)[m
+     private float lastSpawnTime;    // 마지막으로 발판 생성된 시간[m
+ [m
+     private Vector2 poolPosition = new Vector2(0f, -25f);[m
+[31m-[m
+     private float minYPos = -3.5f;[m
+     private float maxYPos = 1.5f;[m
+     private float xPos = 20f;[m
+[36m@@ -31,13 +27,14 @@[m [mpublic class PlatformSpawner : MonoBehaviour[m
+     {[m
+         platforms = new GameObject[platformCount];[m
+ [m
+[31m-        nextSpawnTime = 0;  // 첫번째 발판은 바로 생성[m
+[31m-        lastSpawnTime = 0;[m
+[31m-[m
+         for (int i = 0; i < platformCount; i++)[m
+         {[m
+             platforms[i] = Instantiate(platformPrefab, poolPosition, Quaternion.identity);[m
+         }[m
+[32m+[m
+[32m+[m[32m        nextSpawnTime = 0;  // 첫번째 발판은 바로 생성[m
+[32m+[m[32m        lastSpawnTime = 0;[m
+[32m+[m
+         finishPlatformPrefab = Instantiate(finishPlatformPrefab, poolPosition, Quaternion.identity);[m
+     }[m
+ [m
+[36m@@ -49,24 +46,33 @@[m [mpublic class PlatformSpawner : MonoBehaviour[m
+         if (isFinish)[m
+             return;[m
+ [m
+[31m-        if (GameManager.instance.score <= 200)[m
+[32m+[m[32m        // (현재시간-마지막배치시간)이 다음 배치 시간 이상 흘렀다면[m
+[32m+[m[32m        // or 현재시간이 (마지막배치시간+다음배치시간) 이상 흘렀다면 으로도 구현가능[m
+[32m+[m
+[32m+[m[32m        if (Time.time - lastSpawnTime >= nextSpawnTime)[m
+         {[m
+[31m-            if (Time.time >= lastSpawnTime + nextSpawnTime)[m
+[31m-            {[m
+[31m-                lastSpawnTime = Time.time;[m
+[32m+[m[32m            // 기록된 마지막 배치 시점을 현재 시점으로 갱신[m
+[32m+[m[32m            lastSpawnTime = Time.time;[m
+ [m
+[31m-                platforms[currentIndex].transform.position = new Vector2(xPos, Random.Range(minYPos, maxYPos));[m
+[31m-                currentIndex++;[m
+[32m+[m[32m            // 사용할 현재 순번의 발판 게임오브젝트를 비활성화 후 즉시 다시 활성화[m
+[32m+[m[32m            // 이 때 발판의 onEnable 메서드가 실행된다.[m
+[32m+[m[32m            platforms[currentIndex].SetActive(false);[m
+[32m+[m[32m            platforms[currentIndex].SetActive(true);[m
+ [m
+[31m-                nextSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);[m
+[32m+[m[32m            // 재배치[m
+[32m+[m[32m            platforms[currentIndex].transform.position = new Vector2(xPos, Random.Range(minYPos, maxYPos));[m
+[32m+[m[32m            currentIndex++;[m
+ [m
+[31m-                if (currentIndex >= platforms.Length - 1)[m
+[31m-                    currentIndex = 0;[m
+[31m-            }[m
+[32m+[m[32m            // 다음 배치 시간[m
+[32m+[m[32m            nextSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);[m
+[32m+[m
+[32m+[m[32m            if (currentIndex >= platforms.Length)[m
+[32m+[m[32m                currentIndex = 0;[m
+         }[m
+[31m-        else[m
+[32m+[m
+[32m+[m[32m        if (GameManager.instance.score >= 30)[m
+         {[m
+[31m-            finishPlatformPrefab.transform.position = new Vector3(xPos, Random.Range(minYPos, maxYPos));[m
+[32m+[m[32m            finishPlatformPrefab.transform.position = new Vector3(xPos + 10f, Random.Range(minYPos, maxYPos));[m
+             isFinish = true;[m
+         }[m
+     }[m
+[1mdiff --git a/UniRun/Assets/Scripts/PlayerController.cs b/UniRun/Assets/Scripts/PlayerController.cs[m
+[1mindex 161e611..b340f14 100644[m
+[1m--- a/UniRun/Assets/Scripts/PlayerController.cs[m
+[1m+++ b/UniRun/Assets/Scripts/PlayerController.cs[m
+[36m@@ -87,7 +87,6 @@[m [mpublic class PlayerController : MonoBehaviour[m
+             isGrounded = true;[m
+             jumpCount = 0;[m
+         }[m
+[31m-        GameManager.instance.AddScore(10);[m
+     }[m
+ [m
+     private void OnCollisionExit2D(Collision2D collision)[m
