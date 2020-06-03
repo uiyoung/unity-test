@@ -74,7 +74,7 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         // ending
-        if (endingIndex <= 3)
+        if (endingIndex <= 0)
         {
             finishPlatformPrefab.transform.position = new Vector3(xPos + 10f, Random.Range(minYPos, maxYPos));
             isFinish = true;
