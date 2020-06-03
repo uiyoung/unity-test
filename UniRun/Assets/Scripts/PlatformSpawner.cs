@@ -8,6 +8,7 @@ public class PlatformSpawner : MonoBehaviour
     private GameObject[] platforms;
     private int platformCount = 4;
     private int currentIndex = 0;
+    private int endingIndex = 5;
 
     public GameObject finishPlatformPrefab;
 
@@ -32,7 +33,7 @@ public class PlatformSpawner : MonoBehaviour
             platforms[i] = Instantiate(platformPrefab, poolPosition, Quaternion.identity);
         }
 
-        nextSpawnTime = 0;  // 첫번째 발판은 바로 생성
+        nextSpawnTime = 0;  // 첫번째 발판은 바로 생성하기 위해
         lastSpawnTime = 0;
 
         finishPlatformPrefab = Instantiate(finishPlatformPrefab, poolPosition, Quaternion.identity);
@@ -61,6 +62,8 @@ public class PlatformSpawner : MonoBehaviour
 
             // 재배치
             platforms[currentIndex].transform.position = new Vector2(xPos, Random.Range(minYPos, maxYPos));
+
+            endingIndex--;
             currentIndex++;
 
             // 다음 배치 시간
@@ -70,7 +73,8 @@ public class PlatformSpawner : MonoBehaviour
                 currentIndex = 0;
         }
 
-        if (GameManager.instance.score >= 30)
+        // ending
+        if (endingIndex <= 3)
         {
             finishPlatformPrefab.transform.position = new Vector3(xPos + 10f, Random.Range(minYPos, maxYPos));
             isFinish = true;
