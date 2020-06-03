@@ -15,17 +15,15 @@ public class Platform : MonoBehaviour
         {
             if (Random.Range(0, 3) == 0)
                 obstacles[i].SetActive(true);
-            else
-                obstacles[i].SetActive(false);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "player" && !stepped)
+        if(collision.collider.tag == "Player" && !stepped)
         {
             stepped = true;
-            GameManager.instance.AddScore(1);
+            GameManager.instance.AddScore(10);
         }
     }
 }
