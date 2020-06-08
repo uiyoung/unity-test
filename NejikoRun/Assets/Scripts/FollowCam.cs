@@ -6,7 +6,7 @@ public class FollowCam : MonoBehaviour
 {
     public Transform target;
 
-    private float _speed = 50f;
+    private float _speed = 5f;
     private Vector3 _diff;  // 플레이어와 카메라 사이의 차이
 
     private void Start()
