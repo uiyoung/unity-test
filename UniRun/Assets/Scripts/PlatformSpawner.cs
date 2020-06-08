@@ -56,7 +56,7 @@ public class PlatformSpawner : MonoBehaviour
             lastSpawnTime = Time.time;
 
             // 사용할 현재 순번의 발판 게임오브젝트를 비활성화 후 즉시 다시 활성화
-            // 이 때 발판의 onEnable 메서드가 실행된다.
+            // 이 때 발판의 OnEnable 메서드가 실행된다.
             platforms[currentIndex].SetActive(false);
             platforms[currentIndex].SetActive(true);
 
@@ -66,11 +66,10 @@ public class PlatformSpawner : MonoBehaviour
             endingIndex--;
             currentIndex++;
 
+            currentIndex %= platformCount;
+
             // 다음 배치 시간
             nextSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
-
-            if (currentIndex >= platforms.Length)
-                currentIndex = 0;
         }
 
         // ending
