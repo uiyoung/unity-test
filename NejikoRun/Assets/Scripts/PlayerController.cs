@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     public int Life { get; private set; } = MAX_LIFE;
     public bool IsStun { get { return recoverTime > 0f || Life <= 0; } }
 
-
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -34,13 +33,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Life);
-
         if (IsStun)
         {
             _moveDir.x = 0;
             _moveDir.y = 0;
             recoverTime -= Time.deltaTime;
+            return;
         }
         else
         {
@@ -56,7 +54,7 @@ public class PlayerController : MonoBehaviour
             _moveDir.z = Mathf.Clamp(tempSpeed, 0, speedZ);
 
             float ratioX = _targetLane - transform.position.x;
-            _moveDir.x = speedX * ratioX;
+            _moveDir.x = ratioX * speedX;
 
         }
         // 중력값으로 매 프레임 바닥으로 끌어내린다
@@ -73,25 +71,25 @@ public class PlayerController : MonoBehaviour
         _anim.SetBool("run", _moveDir.z > 0);
     }
 
-
-    private void MoveToLeft()
+    public void MoveToLeft()
     {
         if (_controller.isGrounded && _targetLane > MIN_LANE)
             _targetLane--;
     }
-    private void MoveToRight()
+    public void MoveToRight()
     {
         if (_controller.isGrounded && _targetLane < MAX_LANE)
             _targetLane++;
     }
 
-    private void Jump()
+    public void Jump()
     {
+        if (IsStun)
+            return;
+
         if (_controller.isGrounded)
         {
             _moveDir.y = speedJump;
-            _controller.Move(_moveDir * Time.deltaTime);
-
             _anim.SetTrigger("jump");
         }
     }
