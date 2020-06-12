@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager 
 {
@@ -13,6 +14,10 @@ public class InputManager
     // MonoBehaviour로 실행되는게 아니라 누군가 직접 부르므로 OnUpdate로 바꾼다
     public void OnUpdate()
     {
+        // ui 클릭시 return
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         // 키 액션이 있었으면 전파 시작
         // keyAction을 구독한 애들은 전달받게 된다.
         if (Input.anyKey && KeyAction != null)
