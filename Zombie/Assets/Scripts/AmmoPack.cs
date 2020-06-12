@@ -12,7 +12,7 @@ public class AmmoPack : MonoBehaviour, IItem {
         if (playerShooter != null && playerShooter.gun != null)
         {
             // 총의 남은 탄환 수를 ammo 만큼 더한다
-            playerShooter.gun.ammoRemain += ammo;
+            playerShooter.gun.AmmoRemain += ammo;
         }
 
         // 사용되었으므로, 자신을 파괴
