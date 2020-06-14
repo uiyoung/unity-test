@@ -14,7 +14,7 @@ public class UI_Inven_Item : UI_Base
         ItemNameText
     }
 
-    public string Name { get; set; }
+    private string _name;
 
     void Start()
     {
@@ -24,13 +24,13 @@ public class UI_Inven_Item : UI_Base
     public override void Init()
     {
         Bind<GameObject>(typeof(GameObjects));
-        Get<GameObject>((int)GameObjects.ItemNameText).GetComponent<Text>().text = Name;
+        Get<GameObject>((int)GameObjects.ItemNameText).GetComponent<Text>().text = _name;
 
-        Get<GameObject>((int)GameObjects.ItemIcon).AddUIEvent((PointerEventData data) => { Debug.Log($"아이템클릭:{Name}"); });
+        Get<GameObject>((int)GameObjects.ItemIcon).AddUIEvent((PointerEventData data) => { Debug.Log($"아이템클릭:{_name}"); });
     }
 
-    void Update()
+    public void SetInfo(string name)
     {
-        
+        _name = name;
     }
 }

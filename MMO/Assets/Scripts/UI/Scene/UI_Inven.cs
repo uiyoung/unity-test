@@ -32,7 +32,7 @@ public class UI_Inven : UI_Scene
             GameObject item = Managers.UI.MakeSubItem<UI_Inven_Item>(parent: gridPanel.transform).gameObject;
 
             UI_Inven_Item invenItem = item.GetOrAddComponent<UI_Inven_Item>();
-            invenItem.Name = $"매직마르시아 {i}번";
+            invenItem.SetInfo($"매직마르시아 {i}번");
         }
     }
 }
