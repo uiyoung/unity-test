@@ -5,8 +5,9 @@ using UnityEngine;
 public class UIManager
 {
     private int _order = 10;    // 10부터 시작해서 sort가 false일때의 _order와 구분. 0~9까지의 _order는 먼저 떠야할 팝업에 예약
-    Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
-    UI_Scene _sceneUI = null;
+    private Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
+    private UI_Scene _sceneUI = null;
+
     public GameObject Root
     {
         get
@@ -102,4 +103,11 @@ public class UIManager
         while (_popupStack.Count > 0)
             ClosePopupUI();
     }
+
+    public void Clear()
+    {
+        CloseAllPopupUI();
+        _sceneUI = null;
+    }
+
 }
