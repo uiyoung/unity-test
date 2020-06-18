@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float _damage = 25; // 공격력
     private float _fireDistance = 50f; // 사정거리
 
-    public int AmmoRemain { get; set; } = 100;// 남은 전체 탄약
+    public int AmmoRemain { get; set; } = 100;  // 남은 전체 탄약
     public int MagAmmo { get; set; } // 현재 탄창에 남아있는 탄약
     [SerializeField] private int _magCapacity = 25; // 탄창 용량
 
@@ -108,7 +108,7 @@ public class Gun : MonoBehaviour
     // 재장전 시도
     public bool Reload()
     {
-        if(State == GunState.Reloading || AmmoRemain<=0 || MagAmmo >= _magCapacity)
+        if (State == GunState.Reloading || AmmoRemain <= 0 || MagAmmo >= _magCapacity)
             return false;
 
         StartCoroutine(ReloadCoroutine());

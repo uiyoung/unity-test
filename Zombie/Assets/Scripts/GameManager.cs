@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // 플레이어 캐릭터의 사망 이벤트 발생시 게임 오버
-        FindObjectOfType<PlayerHealth>().onDeath += EndGame;
+        FindObjectOfType<PlayerHealth>().OnDeath += EndGame;
     }
 
     private static void Init()
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
             // 점수 추가
             _score += newScore;
             // 점수 UI 텍스트 갱신
-            UIManager.instance.UpdateScoreText(_score);
+            UIManager.Instance.UpdateScoreText(_score);
         }
     }
 
@@ -52,6 +52,6 @@ public class GameManager : MonoBehaviour
         // 게임 오버 상태를 참으로 변경
         IsGameover = true;
         // 게임 오버 UI를 활성화
-        UIManager.instance.SetActiveGameoverUI(true);
+        UIManager.Instance.SetActiveGameoverUI(true);
     }
 }
