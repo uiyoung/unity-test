@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManagerEx : MonoBehaviour
+public class SceneManagerEx
 {
-    public BaseScene CurrentScene { get { return FindObjectOfType<BaseScene>(); } }
+    public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
 
     public void LoadScene(Define.Scene type)
     {

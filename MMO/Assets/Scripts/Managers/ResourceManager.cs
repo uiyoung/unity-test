@@ -6,25 +6,35 @@ public class ResourceManager
 {
     public T Load<T>(string path) where T : Object
     {
+        if(typeof(T) == typeof(GameObject))
+        {
+            string name = path;
+            int index = name.LastIndexOf("/");
+            if (index >= 0)
+                name = name.Substring(index + 1);
+
+            GameObject go = Managers.Pool.GetOriginal(name);
+            if (go != null)
+                return go as T;
+        }
+
         return Resources.Load<T>(path);
     }
 
     public GameObject Instantiate(string path, Transform parent = null)
     {
-        GameObject prefab = Load<GameObject>($"Prefabs/{path}");
-
-        if (prefab == null)
+        GameObject original = Load<GameObject>($"Prefabs/{path}");
+        if (original == null)
         {
             Debug.Log($"Failed to load prefab : {path}");
             return null;
         }
 
-        GameObject go = Object.Instantiate(prefab, parent);// Object 붙인이유 : 안붙이면 이 클래스의 Instantiate()를 실행해버려서 재귀가 되어버린다.
+        if (original.GetComponent<Poolable>() != null)
+            return Managers.Pool.Pop(original, parent).gameObject;
 
-        // 생성된 프리팹의 이름에 붙는 "(Clone)" 없애기
-        int index = go.name.IndexOf("(Clone)");
-        if (index > 0)
-            go.name = go.name.Substring(0, index);
+        GameObject go = Object.Instantiate(original, parent);// Object 붙인이유 : 안붙이면 이 클래스의 Instantiate()를 실행해버려서 재귀가 되어버린다.
+        go.name = original.name; // 생성된 프리팹의 이름에 (clone)붙는걸 없애기 위해
 
         return go;
     }
@@ -33,6 +43,14 @@ public class ResourceManager
     {
         if (go == null)
             return;
+
+        // 만약에 풀링이 필요한 아이라면 -> 풀링 매니저한테 위탁
+        Poolable poolable = go.GetComponent<Poolable>();
+        if(poolable != null)
+        {
+            Managers.Pool.Push(poolable);
+            return;
+        }
 
         Object.Destroy(go);
     }
