@@ -42,16 +42,6 @@ public class Enemy : LivingEntity
         _renderer = GetComponentInChildren<Renderer>();
     }
 
-    // 적 AI의 초기 스펙을 결정하는 셋업 메서드
-    public void Setup(float newHealth, float newDamage, float newSpeed, Color skinColor)
-    {
-        StartingHealth = newHealth;
-        Health = newHealth;
-        _damage = newDamage;
-        _pathFinder.speed = newSpeed;
-        _renderer.material.color = skinColor;
-    }
-
     private void Start()
     {
         // 게임 오브젝트 활성화와 동시에 AI의 추적 루틴 시작
@@ -64,6 +54,16 @@ public class Enemy : LivingEntity
         _anim.SetBool("HasTarget", HasTarget);
     }
 
+    // 적 AI의 초기 스펙을 결정하는 셋업 메서드
+    public void Setup(float newHealth, float newDamage, float newSpeed, Color skinColor)
+    {
+        StartingHealth = newHealth;
+        Health = newHealth;
+        _damage = newDamage;
+        _pathFinder.speed = newSpeed;
+        _renderer.material.color = skinColor;
+    }
+    
     // 주기적으로 추적할 대상의 위치를 찾아 경로를 갱신
     private IEnumerator UpdatePath()
     {
@@ -150,9 +150,6 @@ public class Enemy : LivingEntity
 
                 attackTarget.OnDamage(_damage, hitPoint, hitNormal);
             }
-            
-        // 트리거 충돌한 상대방 게임 오브젝트가 추적 대상이라면 공격 실행   
-
         }
     }
 }
