@@ -16,7 +16,6 @@ public class Creature : MonoBehaviour
 
     private void Start()
     {
-
     }
 
     protected void Move(string _direction, int _frequency)

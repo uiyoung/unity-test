@@ -25,7 +25,7 @@ public class PlayerHealth : LivingEntity
 
     protected override void OnEnable()
     {
-        // LivingEntity의 OnEnable() 실행 (상태 초기화)
+        // LivingEntity의 OnEnable() 실행(상태 초기화)
         base.OnEnable();
 
         healthSlider.gameObject.SetActive(true);
@@ -39,7 +39,6 @@ public class PlayerHealth : LivingEntity
 
     public override void RestoreHealth(float newHealth)
     {
-        // LivingEntity의 RestoreHealth() 실행 (체력 증가)
         base.RestoreHealth(newHealth);
 
         healthSlider.value = Health;

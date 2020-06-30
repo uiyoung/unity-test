@@ -26,31 +26,26 @@ public class UIManager : MonoBehaviour
     public Text waveText; // 적 웨이브 표시용 텍스트
     public GameObject gameoverUI; // 게임 오버시 활성화할 UI 
 
-    // 탄약 텍스트 갱신
     public void UpdateAmmoText(int magAmmo, int remainAmmo)
     {
         ammoText.text = magAmmo + "/" + remainAmmo;
     }
 
-    // 점수 텍스트 갱신
     public void UpdateScoreText(int newScore)
     {
         scoreText.text = "Score : " + newScore;
     }
 
-    // 적 웨이브 텍스트 갱신
     public void UpdateWaveText(int waves, int count)
     {
         waveText.text = "Wave : " + waves + "\nEnemy Left : " + count;
     }
 
-    // 게임 오버 UI 활성화
     public void SetActiveGameoverUI(bool active)
     {
         gameoverUI.SetActive(active);
     }
 
-    // 게임 재시작
     public void GameRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
