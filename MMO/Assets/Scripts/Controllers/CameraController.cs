@@ -19,13 +19,15 @@ public class CameraController : MonoBehaviour
     {
         if (_mode == Define.CameraMode.QuaterView)
         {
+            if (_player.IsValid() == false)
+                return;
+
             // 캐릭터가 벽에 가리면 카메라를 땡기기
             RaycastHit hit;
-            if (Physics.Raycast(_player.transform.position, _delta, out hit, _delta.magnitude, LayerMask.GetMask("Wall")))
+            if (Physics.Raycast(_player.transform.position, _delta, out hit, _delta.magnitude, LayerMask.GetMask("Block")))
             {
                 float dist = (hit.point - _player.transform.position).magnitude * 0.8f;
-                transform.position = _player.transform.position + _delta.normalized * dist;
-
+                transform.position = _player.transform.position + Vector3.up * 0.5f + _delta.normalized * dist;
             }
             else
             {
@@ -33,6 +35,11 @@ public class CameraController : MonoBehaviour
                 transform.LookAt(_player.transform.position);
             }
         }
+    }
+
+    public void SetPlayer(GameObject player)
+    {
+        _player = player;
     }
 
     public void SetQuaterView(Vector3 delta)

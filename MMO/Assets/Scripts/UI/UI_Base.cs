@@ -12,6 +12,11 @@ public abstract class UI_Base : MonoBehaviour
 
     public abstract void Init();
 
+    private void Start()
+    {
+        Init();
+    }
+
     /*
      *enum값을 넘겨주면 그안의 애들을 인스펙터에서 이름으로 찾아서 _objects 딕셔너리에 저장하는 메서드
      *UI를 public으로 만들고 끌어다 매핑하는 것을 자동화 
