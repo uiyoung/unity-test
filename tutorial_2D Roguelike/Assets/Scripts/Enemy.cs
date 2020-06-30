@@ -8,7 +8,6 @@ public class Enemy : MovingObject
 
     private Animator _anim;
     private Transform _target;
-
     private bool _isMoved;
 
     protected override void Start()
