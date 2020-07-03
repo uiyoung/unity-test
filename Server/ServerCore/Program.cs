@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -6,32 +9,52 @@ namespace ServerCore
 {
     class Program
     {
-        static bool _stop = false;
-
-        static void ThreadMain()
-        {
-            Console.WriteLine("스레드 시작");
-            while(_stop == false)
-            {
-                // 누군가가 stop 신호를 해주기를 기달린다.
-            }
-            Console.WriteLine("스레드 종료");
-        }
 
         static void Main(string[] args)
         {
-            Task t = new Task(ThreadMain);
-            t.Start();
+            //Dns
+            string host = Dns.GetHostName();
+            IPHostEntry ipHost = Dns.GetHostEntry(host);
+            IPAddress ipAddr = ipHost.AddressList[0];
+            IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
-            Thread.Sleep(1000);
+            // 문지기
+            Socket listenSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-            _stop = true;
+            try
+            {
+                // 문지기 교육
+                listenSocket.Bind(endPoint);
 
-            Console.WriteLine("stop 호출");
-            Console.WriteLine("종료 대기중");
+                // 영업시작 (backlog : 최대대기수)
+                listenSocket.Listen(10);
 
-            t.Wait();
-            Console.WriteLine("종료 성공");
+                while (true)
+                {
+                    Console.WriteLine("listening...");
+
+                    // 손님을 입장시킨다
+                    Socket clientSocket = listenSocket.Accept();
+
+                    // 받는다
+                    byte[] recvBuff = new byte[1024];
+                    int recvBytes = clientSocket.Receive(recvBuff);
+                    Encoding.UTF8.GetString(recvBuff, 0, recvBytes);
+                    Console.WriteLine($"[From Client] {recvBuff}");
+
+                    // 보낸다
+                    byte[] sendBuff = Encoding.UTF8.GetBytes("Welcome to MMO Server!");
+                    clientSocket.Send(sendBuff);
+
+                    // 쫓아낸다
+                    clientSocket.Shutdown(SocketShutdown.Both);
+                    clientSocket.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
     }
 }
