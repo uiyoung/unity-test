@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {}
+    "C:\\Users\\suy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\suy\\Documents\\unity-test\\Server\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\Server\\obj\\",
+      "projectPath": "C:\\Users\\suy\\Documents\\unity-test\\Server\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\suy\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\suy\\Documents\\unity-test\\Server\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\suy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

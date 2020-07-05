@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\ServerCore\\ServerCore.csproj": {}
+    "C:\\Users\\suy\\Documents\\unity-test\\Server\\ServerCore\\ServerCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\ServerCore\\ServerCore.csproj": {
+    "C:\\Users\\suy\\Documents\\unity-test\\Server\\ServerCore\\ServerCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\ServerCore\\ServerCore.csproj",
+        "projectUniqueName": "C:\\Users\\suy\\Documents\\unity-test\\Server\\ServerCore\\ServerCore.csproj",
         "projectName": "ServerCore",
-        "projectPath": "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\ServerCore\\ServerCore.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Documents\\suy\\unity-test\\Server\\ServerCore\\obj\\",
+        "projectPath": "C:\\Users\\suy\\Documents\\unity-test\\Server\\ServerCore\\ServerCore.csproj",
+        "packagesPath": "C:\\Users\\suy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\suy\\Documents\\unity-test\\Server\\ServerCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\suy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
