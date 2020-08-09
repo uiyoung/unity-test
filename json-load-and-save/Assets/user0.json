@@ -1,0 +1,46 @@
+{
+    "id": "user0",
+    "name": "유저0",
+    "records": [
+        {
+            "date": "2020-08-07",
+            "trainingTime": 1200,
+            "totalCalories": 120,
+            "trainingName": "간단히",
+            "exercises": [
+                {
+                    "name": "푸쉬업",
+                    "count": 3
+                },
+                {
+                    "name": "스쿼트",
+                    "count": 2
+                },
+                {
+                    "name": "런지",
+                    "count": 3
+                }
+            ]
+        },
+        {
+            "date": "2020-08-10",
+            "trainingTime": 920,
+            "totalCalories": 120,
+            "trainingName": "타바타",
+            "exercises": [
+                {
+                    "name": "점핑잭",
+                    "count": 5
+                },
+                {
+                    "name": "스쿼트",
+                    "count": 3
+                },
+                {
+                    "name": "마운틴 클라이밍",
+                    "count": 24
+                }
+            ]
+        }
+    ]
+}
