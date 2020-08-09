@@ -38,16 +38,19 @@ public class TrainingManager : MonoBehaviour
     {
         string userName = trainingResult.id;
         string jsonData = JsonUtility.ToJson(trainingResult, true);
-        string path = Path.Combine(Application.dataPath, $"{userName}.json");
+        //string path = Path.Combine(Application.dataPath, $"{userName}.json");
+        string path = Path.Combine(Application.dataPath, "Resources", "Data", $"{userName}.json");
         File.WriteAllText(path, jsonData);
     }
 
     [ContextMenu("Load From Json Data")]
     void LoadDataFromJson()
     {
-        string path = Path.Combine(Application.dataPath, "user1.json");
-        string jsonData = File.ReadAllText(path);
-        trainingResult = JsonUtility.FromJson<TrainingResult>(jsonData);
+        //string path = Path.Combine(Application.dataPath, "user1.json");
+        //string jsonData = File.ReadAllText(path);
+        //trainingResult = JsonUtility.FromJson<TrainingResult>(jsonData);
+        TextAsset textAsset = Resources.Load<TextAsset>($"Data/user1");
+        trainingResult = JsonUtility.FromJson<TrainingResult>(textAsset.text);
 
         Debug.Log($"id : {trainingResult.id}");
         Debug.Log($"name : {trainingResult.name}");
