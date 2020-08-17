@@ -10,12 +10,12 @@ public class Web : MonoBehaviour
         //StartCoroutine(GetDate());
         //StartCoroutine(GetUsers());
         //StartCoroutine(Login("testuser", "1234"));
-        //StartCoroutine(Register("testuser2", "1234"));
+        //StartCoroutine(Register("testuser5", "1234"));
     }
 
     public IEnumerator GetDate()
     {
-        string uri = "http://193.122.104.212/test/getdate.php";
+        string uri = "https://uiyoung.cf/test/getdate.php";
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
             // Request and wait for the desired page.
@@ -28,7 +28,7 @@ public class Web : MonoBehaviour
                     Debug.LogError("Error\n" + webRequest.error);
                     break;
                 case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError("HTTP Error\n" + webRequest.error);
+                    Debug.LogError("http Error\n" + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
                     Debug.Log("Received\n" + webRequest.downloadHandler.text);
@@ -39,7 +39,7 @@ public class Web : MonoBehaviour
 
     public IEnumerator GetUsers()
     {
-        string uri = "http://193.122.104.212/test/getusers.php";
+        string uri = "https://uiyoung.cf/test/getusers.php";
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
             // Request and wait for the desired page.
@@ -52,7 +52,7 @@ public class Web : MonoBehaviour
                     Debug.LogError("Error\n" + webRequest.error);
                     break;
                 case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError("HTTP Error\n" + webRequest.error);
+                    Debug.LogError("http Error\n" + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
                     Debug.Log("Received\n" + webRequest.downloadHandler.text);
@@ -67,7 +67,28 @@ public class Web : MonoBehaviour
         form.AddField("loginUser", username);
         form.AddField("loginPass", password);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://193.122.104.212/test/login.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("https://uiyoung.cf/test/login.php", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+                Debug.Log(www.error);
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+                Main.Instance.userInfo.SetCredentials(username, password);
+                Main.Instance.userInfo.UserID = www.downloadHandler.text;
+            }
+        }
+    }
+
+    public IEnumerator Register(string username, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("loginUser", username);
+        form.AddField("loginPass", password);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("https://uiyoung.cf/test/register-user.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -78,20 +99,36 @@ public class Web : MonoBehaviour
         }
     }
 
-    public IEnumerator Register(string username, string password)
+
+    public IEnumerator GetItemsIDs(string userID)
     {
+        string uri = "https://uiyoung.cf/test/get-item-ids.php";
         WWWForm form = new WWWForm();
-        form.AddField("loginUser", username);
-        form.AddField("loginPass", password);
+        form.AddField("userID", userID);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://193.122.104.212/test/register-user.php", form))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, form))
         {
-            yield return www.SendWebRequest();
+            yield return webRequest.SendWebRequest();
 
-            if (www.result != UnityWebRequest.Result.Success)
-                Debug.Log(www.error);
-            else
-                Debug.Log(www.downloadHandler.text);
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError("Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("http Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(webRequest.downloadHandler.text);
+
+                    break;
+            }
         }
+    }
+
+    public void OnClickShowUserItems()
+    {
+        StartCoroutine(GetItemsIDs(Main.Instance.userInfo.UserID));
     }
 }

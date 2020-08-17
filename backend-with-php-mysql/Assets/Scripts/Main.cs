@@ -6,6 +6,7 @@ public class Main : MonoBehaviour
 {
     public static Main Instance;
     public Web web;
+    public UserInfo userInfo;
 
     void Start()
     {
@@ -13,6 +14,7 @@ public class Main : MonoBehaviour
             Instance = this;
 
         web = GetComponent<Web>();
+        userInfo = GetComponent<UserInfo>();
     }
 
     void Update()
