@@ -370,6 +370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 119704443}
   - component: {fileID: 119704444}
+  - component: {fileID: 119704445}
   m_Layer: 5
   m_Name: Items
   m_TagString: Untagged
@@ -423,6 +424,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &119704445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119704442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9d37cd9d1f0ac4bbf606f71c4b4688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &120566174
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,6 +998,7 @@ GameObject:
   - component: {fileID: 326298670}
   - component: {fileID: 326298669}
   - component: {fileID: 326298668}
+  - component: {fileID: 326298671}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -1005,6 +1019,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   web: {fileID: 0}
+  userInfo: {fileID: 0}
+  login: {fileID: 680298488}
+  userProfile: {fileID: 676219068}
 --- !u!114 &326298669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1031,6 +1048,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &326298671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326298667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68685e188fc810d4091bbffd935f5438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &343348555
 GameObject:
   m_ObjectHideFlags: 0
@@ -4372,6 +4401,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 119704443}
     m_Modifications:
+    - target: {fileID: 1149069886889516763, guid: 70622e878f0305845994e44dab96da62, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149069886889516763, guid: 70622e878f0305845994e44dab96da62, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149069886889516763, guid: 70622e878f0305845994e44dab96da62, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 1243358462204218365, guid: 70622e878f0305845994e44dab96da62, type: 3}
       propertyPath: m_Name
       value: Item

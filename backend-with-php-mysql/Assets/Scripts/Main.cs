@@ -7,6 +7,10 @@ public class Main : MonoBehaviour
     public static Main Instance;
     public Web web;
     public UserInfo userInfo;
+    public Login login;
+
+
+    public GameObject userProfile;
 
     void Start()
     {
@@ -17,8 +21,4 @@ public class Main : MonoBehaviour
         userInfo = GetComponent<UserInfo>();
     }
 
-    void Update()
-    {
-
-    }
 }

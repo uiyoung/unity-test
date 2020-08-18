@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -78,6 +79,16 @@ public class Web : MonoBehaviour
                 Debug.Log(www.downloadHandler.text);
                 Main.Instance.userInfo.SetCredentials(username, password);
                 Main.Instance.userInfo.UserID = www.downloadHandler.text;
+
+                if (www.downloadHandler.text.Contains("Wrong Credentials") || www.downloadHandler.text.Contains("Username does not exists"))
+                    Debug.Log("Try Again");
+                else
+                {
+                    // If we login correctly
+                    Main.Instance.userProfile.SetActive(true);
+                    Main.Instance.login.gameObject.SetActive(false);
+                }
+
             }
         }
     }
@@ -100,7 +111,7 @@ public class Web : MonoBehaviour
     }
 
 
-    public IEnumerator GetItemsIDs(string userID)
+    public IEnumerator GetItemsIDs(string userID, Action<string> callback)
     {
         string uri = "https://uiyoung.cf/test/get-item-ids.php";
         WWWForm form = new WWWForm();
@@ -121,14 +132,41 @@ public class Web : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     Debug.Log(webRequest.downloadHandler.text);
+                    string jsonArray = webRequest.downloadHandler.text;
+                    callback(jsonArray);
 
                     break;
             }
         }
     }
 
-    public void OnClickShowUserItems()
+    public IEnumerator GetItem(string itemID, Action<string> callback)
     {
-        StartCoroutine(GetItemsIDs(Main.Instance.userInfo.UserID));
+        string uri = "https://uiyoung.cf/test/get-item.php";
+        WWWForm form = new WWWForm();
+        form.AddField("itemID", itemID);
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, form))
+        {
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError("Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("http Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(webRequest.downloadHandler.text);
+                    string jsonArray = webRequest.downloadHandler.text;
+                    callback(jsonArray);
+
+                    break;
+            }
+        }
     }
+
 }
