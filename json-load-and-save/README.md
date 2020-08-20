@@ -1,3 +1,3 @@
 # json load and save
 
-load and save data with JSON JsonUtility
+load and save data with JsonUtility
