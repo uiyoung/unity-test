@@ -40,7 +40,7 @@ public class Web : MonoBehaviour
 
     public IEnumerator GetUsers()
     {
-        string uri = "https://uiyoung.cf/test/getusers.php";
+        string uri = "https://uiyoung.cf/test/get-users.php";
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
             // Request and wait for the desired page.
@@ -93,11 +93,12 @@ public class Web : MonoBehaviour
         }
     }
 
-    public IEnumerator Register(string username, string password)
+    public IEnumerator Register(string username, string password, string confirmPassword)
     {
         WWWForm form = new WWWForm();
         form.AddField("loginUser", username);
         form.AddField("loginPass", password);
+        form.AddField("confirmPass", confirmPassword);
 
         using (UnityWebRequest www = UnityWebRequest.Post("https://uiyoung.cf/test/register-user.php", form))
         {
@@ -109,7 +110,6 @@ public class Web : MonoBehaviour
                 Debug.Log(www.downloadHandler.text);
         }
     }
-
 
     public IEnumerator GetItemsIDs(string userID, Action<string> callback)
     {
@@ -133,6 +133,11 @@ public class Web : MonoBehaviour
                 case UnityWebRequest.Result.Success:
                     Debug.Log(webRequest.downloadHandler.text);
                     string jsonArray = webRequest.downloadHandler.text;
+
+                    // 아이템이 하나도 없는 경우
+                    if (jsonArray == "0")
+                        break;
+                    
                     callback(jsonArray);
 
                     break;
@@ -169,4 +174,33 @@ public class Web : MonoBehaviour
         }
     }
 
+    public IEnumerator SellItem(string id, string userID, string itemID, Action callback)
+    {
+        string uri = "https://uiyoung.cf/test/sell-item.php";
+        WWWForm form = new WWWForm();
+        form.AddField("id", id);
+        form.AddField("userID", userID);
+        form.AddField("itemID", itemID);
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, form))
+        {
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError("Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("http Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(webRequest.downloadHandler.text);
+                    callback();
+
+                    break;
+            }
+        }
+    }
 }

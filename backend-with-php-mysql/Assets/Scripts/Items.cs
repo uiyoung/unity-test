@@ -17,7 +17,6 @@ public class Items : MonoBehaviour
         };
 
         CreateItems();
-
     }
 
     public void CreateItems()
@@ -35,6 +34,7 @@ public class Items : MonoBehaviour
         {
             //create local variables
             bool isDone = false;    // are we done downloading?
+            string id = jsonArray[i].AsObject["id"];
             string itemId = jsonArray[i].AsObject["itemID"];
             JSONObject itemInfoJson = new JSONObject();
 
@@ -52,11 +52,21 @@ public class Items : MonoBehaviour
             yield return new WaitUntil(() => isDone == true);
 
             // instantiate gameobject (item prefab)
-            GameObject go = Resources.Load<GameObject>("Prefabs/Item");
+            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
+            go.transform.SetParent(this.transform);
+            go.transform.localScale = new Vector3(1f, 1f, 1f);
             go.transform.Find("Name").GetComponent<Text>().text = itemInfoJson["name"];
-            go.transform.Find("Price").GetComponent<Text>().text = itemInfoJson["price"];
+            go.transform.Find("Price").GetComponent<Text>().text = "$" + itemInfoJson["price"];
             go.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
-            Instantiate(go, this.transform);
+            go.transform.Find("SellButton").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                StartCoroutine(Main.Instance.web.SellItem(id, Main.Instance.userInfo.UserID, itemId, ()=> Destroy(go)));
+            });
         }
+    }
+
+    public void hi()
+    {
+        print("hi");
     }
 }

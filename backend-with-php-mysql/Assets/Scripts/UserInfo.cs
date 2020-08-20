@@ -11,7 +11,6 @@ public class UserInfo : MonoBehaviour
 
     public string UserID { get; set; }
 
-
     public void SetCredentials(string username, string userPassword)
     {
         _userName = username;

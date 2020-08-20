@@ -12,7 +12,7 @@ public class RegisterUser : MonoBehaviour
     {
         submitButton.onClick.AddListener(() =>
         {
-            StartCoroutine(Main.Instance.web.Register(usernameInput.text, passwordInput.text));
+            StartCoroutine(Main.Instance.web.Register(usernameInput.text, passwordInput.text, confirmPasswordInput.text));
         });
     }
 }
