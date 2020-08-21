@@ -64,14 +64,30 @@ public class ItemManager : MonoBehaviour
             go.transform.Find("Price").GetComponent<Text>().text = $"{itemInfoJson["price"]}G";
             go.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"].ToString();
 
+            byte[] bytes = ImageManager.instance.LoadImage(itemID);
 
-            // create a callback to get the sprite from Web.cs
-            StartCoroutine(Main.Instance.web.GetItemIcon(itemID, (downloadedSprite) =>
+            // download from web
+            if (bytes.Length == 0)
             {
+                // create a callback to get the sprite from Web.cs
+                StartCoroutine(Main.Instance.web.GetItemIcon(itemID, (downloadedBytes) =>
+                {
+                    Sprite sprite = ImageManager.instance.BytesToSprite(downloadedBytes);
+                    Image itemIconImage = go.transform.Find("Icon").GetComponent<Image>();
+                    itemIconImage.sprite = sprite;
+                    itemIconImage.SetNativeSize();
+
+                    ImageManager.instance.SaveImage(itemID, downloadedBytes);
+                }));
+            }
+            // load from device
+            else
+            {
+                Sprite sprite = ImageManager.instance.BytesToSprite(bytes);
                 Image itemIconImage = go.transform.Find("Icon").GetComponent<Image>();
-                itemIconImage.sprite = downloadedSprite;
+                itemIconImage.sprite = sprite;
                 itemIconImage.SetNativeSize();
-            }));
+            }
 
             // Set Sell Button
             go.transform.Find("SellButton").GetComponent<Button>().onClick.AddListener(() =>

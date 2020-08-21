@@ -173,7 +173,7 @@ public class Web : MonoBehaviour
             }
         }
     }
-    public IEnumerator GetItemIcon(string itemID, Action<Sprite> callback)
+    public IEnumerator GetItemIcon(string itemID, Action<Byte[]> callback)
     {
         string uri = "https://uiyoung.cf/test/get-item-icon.php";
         WWWForm form = new WWWForm();
@@ -193,16 +193,10 @@ public class Web : MonoBehaviour
                     Debug.LogError("http Error\n" + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
+                    print($"Downloding icon {itemID}");
                     // result as byte array
                     byte[] bytes = webRequest.downloadHandler.data;
-
-                    // create Textrue2D
-                    Texture2D texture = new Texture2D(2, 2);
-                    texture.LoadImage(bytes);
-
-                    // create sprite (to be placed in UI)
-                    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector3(0.5f, 0.5f));
-                    callback(sprite);
+                    callback(bytes);
 
                     break;
             }
