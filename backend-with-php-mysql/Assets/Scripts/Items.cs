@@ -1,4 +1,5 @@
-﻿using SimpleJSON;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,25 +29,25 @@ public class Items : MonoBehaviour
     private IEnumerator CreateItemsCoroutine(string jsonArrayString)
     {
         // parsing json array string as an array
-        JSONArray jsonArray = JSON.Parse(jsonArrayString) as JSONArray;
+        JArray jArray = JsonConvert.DeserializeObject<JArray>(jsonArrayString);
 
-        for (int i = 0; i < jsonArray.Count; i++)
+        for (int i = 0; i < jArray.Count; i++)
         {
-            //create local variables
+            // create local variables
             bool isDone = false;    // are we done downloading?
-            string id = jsonArray[i].AsObject["id"];
-            string itemId = jsonArray[i].AsObject["itemID"];
-            JSONObject itemInfoJson = new JSONObject();
+            string id = jArray[i]["id"].ToString();
+            string itemID = jArray[i]["itemID"].ToString();
+            JObject itemInfoJson = new JObject();
 
             // create a callback to get the information from Web.cs
             Action<string> getItemInfoCallback = (itemInfo) =>
             {
                 isDone = true;
-                JSONArray tempArray = JSON.Parse(itemInfo) as JSONArray;
-                itemInfoJson = tempArray[0].AsObject;
+                JArray temp = JsonConvert.DeserializeObject<JArray>(itemInfo);
+                itemInfoJson = temp[0] as JObject;
             };
 
-            StartCoroutine(Main.Instance.web.GetItem(itemId, getItemInfoCallback));
+            StartCoroutine(Main.Instance.web.GetItem(itemID, getItemInfoCallback));
 
             // wait until the callback is alled from web (info finished downloading)
             yield return new WaitUntil(() => isDone == true);
@@ -55,18 +56,13 @@ public class Items : MonoBehaviour
             GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
             go.transform.SetParent(this.transform);
             go.transform.localScale = new Vector3(1f, 1f, 1f);
-            go.transform.Find("Name").GetComponent<Text>().text = itemInfoJson["name"];
-            go.transform.Find("Price").GetComponent<Text>().text = "$" + itemInfoJson["price"];
-            go.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
+            go.transform.Find("Name").GetComponent<Text>().text = itemInfoJson["name"].ToString();
+            go.transform.Find("Price").GetComponent<Text>().text = $"${itemInfoJson["price"]}";
+            go.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"].ToString();
             go.transform.Find("SellButton").GetComponent<Button>().onClick.AddListener(() =>
             {
-                StartCoroutine(Main.Instance.web.SellItem(id, Main.Instance.userInfo.UserID, itemId, ()=> Destroy(go)));
+                StartCoroutine(Main.Instance.web.SellItem(id, Main.Instance.userInfo.UserID, itemID, () => Destroy(go)));
             });
         }
-    }
-
-    public void hi()
-    {
-        print("hi");
     }
 }
