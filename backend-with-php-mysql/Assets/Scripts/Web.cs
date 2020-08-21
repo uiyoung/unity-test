@@ -173,6 +173,41 @@ public class Web : MonoBehaviour
             }
         }
     }
+    public IEnumerator GetItemIcon(string itemID, Action<Sprite> callback)
+    {
+        string uri = "https://uiyoung.cf/test/get-item-icon.php";
+        WWWForm form = new WWWForm();
+        form.AddField("itemID", itemID);
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, form))
+        {
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError("Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("http Error\n" + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    // result as byte array
+                    byte[] bytes = webRequest.downloadHandler.data;
+
+                    // create Textrue2D
+                    Texture2D texture = new Texture2D(2, 2);
+                    texture.LoadImage(bytes);
+
+                    // create sprite (to be placed in UI)
+                    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector3(0.5f, 0.5f));
+                    callback(sprite);
+
+                    break;
+            }
+        }
+    }
 
     public IEnumerator SellItem(string id, string userID, string itemID, Action callback)
     {
