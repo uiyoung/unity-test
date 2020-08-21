@@ -52,9 +52,6 @@ public class ItemManager : MonoBehaviour
 
             // instantiate gameobject (item prefab)
             GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
-            //Item item = go.AddComponent<Item>();
-            //item.id = id;
-            //item.itemID = itemID;
             go.transform.SetParent(this.transform);
             go.transform.localScale = Vector3.one;
             go.transform.localPosition = Vector3.zero;
@@ -64,7 +61,9 @@ public class ItemManager : MonoBehaviour
             go.transform.Find("Price").GetComponent<Text>().text = $"{itemInfoJson["price"]}G";
             go.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"].ToString();
 
-            byte[] bytes = ImageManager.instance.LoadImage(itemID);
+            int imgVer = (int)itemInfoJson["imgVer"];
+
+            byte[] bytes = ImageManager.instance.LoadImage(itemID, imgVer);
 
             // download from web
             if (bytes.Length == 0)
@@ -77,7 +76,8 @@ public class ItemManager : MonoBehaviour
                     itemIconImage.sprite = sprite;
                     itemIconImage.SetNativeSize();
 
-                    ImageManager.instance.SaveImage(itemID, downloadedBytes);
+                    ImageManager.instance.SaveImage(itemID, downloadedBytes, imgVer);
+                    ImageManager.instance.SaveVersionJson();
                 }));
             }
             // load from device
@@ -94,6 +94,8 @@ public class ItemManager : MonoBehaviour
             {
                 StartCoroutine(Main.Instance.web.SellItem(id, Main.Instance.userInfo.UserID, itemID, () => Destroy(go)));
             });
+
+            
         }
     }
 }
