@@ -1,0 +1,10 @@
+{
+  "vim.handleKeys": {
+    "<C-d>": false,
+    "<C-s>": false,
+    "<C-[>": true
+  },
+"vim.useCtrlKeys": false,
+"vim.cursorStylePerMode.insert": "line",
+"vim.cursorStylePerMode.normal": "block"
+}

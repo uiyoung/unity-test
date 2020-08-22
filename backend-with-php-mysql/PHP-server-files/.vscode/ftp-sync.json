@@ -1,0 +1,20 @@
+{
+  "remotePath": "/var/www/html/test",
+  "host": "uiyoung.cf",
+  "username": "ubuntu",
+  "port": 22,
+  "secure": false,
+  "protocol": "sftp",
+  "uploadOnSave": true,
+  "passive": false,
+  "debug": false,
+  "privateKeyPath": "C:/Users/suy/.ssh/oci-ssh.key",
+  "passphrase": null,
+  "agent": null,
+  "allow": [],
+  "ignore": ["\\.vscode", "\\.git", "\\.DS_Store"],
+  "generatedFiles": {
+    "extensionsToInclude": [""],
+    "path": ""
+  }
+}
