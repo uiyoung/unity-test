@@ -50,7 +50,7 @@ public class ItemManager : MonoBehaviour
             // wait until the callback is called from web (info finished downloading)
             yield return new WaitUntil(() => isDone == true);
 
-            // instantiate gameobject (item prefab)
+            // instantiate GameObject (item prefab)
             GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Item"));
             go.transform.SetParent(this.transform);
             go.transform.localScale = Vector3.one;
@@ -62,8 +62,10 @@ public class ItemManager : MonoBehaviour
             go.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"].ToString();
 
             int imgVer = (int)itemInfoJson["imgVer"];
-
             byte[] bytes = ImageManager.instance.LoadImage(itemID, imgVer);
+
+            Image itemIconImage = go.transform.Find("Icon").GetComponent<Image>();
+            itemIconImage.preserveAspect = true;
 
             // download from web
             if (bytes.Length == 0)
@@ -71,22 +73,19 @@ public class ItemManager : MonoBehaviour
                 // create a callback to get the sprite from Web.cs
                 StartCoroutine(Main.Instance.web.GetItemIcon(itemID, (downloadedBytes) =>
                 {
-                    Sprite sprite = ImageManager.instance.BytesToSprite(downloadedBytes);
-                    Image itemIconImage = go.transform.Find("Icon").GetComponent<Image>();
-                    itemIconImage.sprite = sprite;
-                    itemIconImage.SetNativeSize();
-
+                    // 서버에서 받은 이미지로 이미지 변경
+                    itemIconImage.sprite = ImageManager.instance.BytesToSprite(downloadedBytes);
+                    // 로컬에 저장
                     ImageManager.instance.SaveImage(itemID, downloadedBytes, imgVer);
+                    // 이미지 버전정보를 json으로 저장
                     ImageManager.instance.SaveVersionJson();
                 }));
             }
             // load from device
             else
             {
-                Sprite sprite = ImageManager.instance.BytesToSprite(bytes);
-                Image itemIconImage = go.transform.Find("Icon").GetComponent<Image>();
-                itemIconImage.sprite = sprite;
-                itemIconImage.SetNativeSize();
+                // 로컬에 있는 이미지로 이미지 변경
+                itemIconImage.sprite = ImageManager.instance.BytesToSprite(bytes);
             }
 
             // Set Sell Button
@@ -94,8 +93,6 @@ public class ItemManager : MonoBehaviour
             {
                 StartCoroutine(Main.Instance.web.SellItem(id, Main.Instance.userInfo.UserID, itemID, () => Destroy(go)));
             });
-
-            
         }
     }
 }

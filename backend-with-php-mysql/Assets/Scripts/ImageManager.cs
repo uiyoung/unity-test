@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ public class ImageManager : MonoBehaviour
 {
     public static ImageManager instance;
     private string _basePath;
-    private JObject _versionJson;
+    private JObject _versionJson;   // 이미지별 버전정보를 저장할 json
     private string _versionJsonPath;
 
     void Awake()
@@ -28,36 +29,32 @@ public class ImageManager : MonoBehaviour
         _versionJson = new JObject();
         _versionJsonPath = Path.Combine(_basePath, "VersionJson");
 
-        // Load Json
-        if(File.Exists(_versionJsonPath))
-        {
-            string jsonString = File.ReadAllText(_versionJsonPath);
-            _versionJson = JsonConvert.DeserializeObject<JObject>(jsonString); 
-        }
+        LoadJsonVersion();
     }
 
-    private bool ImageExists(string fileName)
+    private bool ImageExists(string name)
     {
-        string path = Path.Combine(_basePath, fileName);
+        string path = Path.Combine(_basePath, name);
         return File.Exists(path);
     }
 
-    public void SaveImage(string fileName, byte[] bytes, int imgVer)
+    public void SaveImage(string name, byte[] bytes, int imgVer)
     {
-        string path = Path.Combine(_basePath, fileName);
+        string path = Path.Combine(_basePath, name);
         File.WriteAllBytes(path, bytes);
-        UpdateVersionJson(fileName, imgVer);
+        UpdateJsonVersion(name, imgVer);
     }
 
-    public byte[] LoadImage(string fileName, int imgVer)
+    public byte[] LoadImage(string name, int imgVer)
     {
-        string path = Path.Combine(_basePath, fileName);
+        string path = Path.Combine(_basePath, name);
         byte[] bytes = new byte[0];
 
-        // 이미지 버전이 최신이 아니면 empty array를 리턴
-        if (IsImageUpToDate(fileName, imgVer) == false)
+        // 이미지 버전이 최신이 아니면 empty array를 리턴(새로 서버에서 받는다)
+        if (IsImageUpToDate(name, imgVer) == false)
             return bytes;
 
+        // 이미지가 local에 존재하면 서버에서 받지 않고 그것을 로드한다
         if (ImageExists(path))
             bytes = File.ReadAllBytes(path);
 
@@ -77,17 +74,26 @@ public class ImageManager : MonoBehaviour
         return sprite;
     }
 
-    void UpdateVersionJson(string name, int ver)
+    void UpdateJsonVersion(string name, int imgVer)
     {
-        _versionJson[name] = ver;
+        _versionJson[name] = imgVer;
     }
-
+    
     bool IsImageUpToDate(string name, int ver)
     {
         if(_versionJson[name] != null)
             return (int)_versionJson[name] >= ver;
 
         return false;
+    }
+
+    private void LoadJsonVersion()
+    {
+        if (File.Exists(_versionJsonPath))
+        {
+            string jsonString = File.ReadAllText(_versionJsonPath);
+            _versionJson = JObject.Parse(jsonString);
+        }
     }
 
     public void SaveVersionJson()
