@@ -84,7 +84,6 @@ public class ItemList : MonoBehaviour
                     Debug.LogError($"HTTP Error : {webRequest.error}");
                     break;
                 case UnityWebRequest.Result.Success:
-                    //JArray jsonArray = JArray.Parse(webRequest.downloadHandler.text);
                     _items = JsonConvert.DeserializeObject<Item[]>(webRequest.downloadHandler.text);
 
                     StartCoroutine(GetItemIcons());
@@ -111,7 +110,6 @@ public class ItemList : MonoBehaviour
                 else
                 {
                     Texture2D texture = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
-                    Debug.Log($"{i} : {texture}");
                     _items[i].Icon = Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), Vector2.zero, 10f);
                 }
             }
