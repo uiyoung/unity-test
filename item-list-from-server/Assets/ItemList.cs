@@ -44,16 +44,22 @@ public class ItemList : MonoBehaviour
         GameObject buttonTemplate = transform.GetChild(0).gameObject;
         GameObject go;
 
-        //int length = items.Length;
         int length = _items.Length;
         for (int i = 0; i < length; i++)
         {
+            int idx = i;
             go = Instantiate(buttonTemplate, this.transform);
             go.transform.GetChild(0).GetComponent<Image>().sprite = _items[i].Icon;
             go.transform.GetChild(0).GetComponent<Image>().preserveAspect = true;
             go.transform.GetChild(1).GetComponent<Text>().text = _items[i].Name;
             go.transform.GetChild(2).GetComponent<Text>().text = _items[i].Description;
-            go.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            //go.GetComponent<Button>().AddEventListener(i, ItemClicked);
+            go.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                Debug.Log($"---item {idx} clicked---");
+                Debug.Log($"{_items[idx].Name}");
+                Debug.Log($"{_items[idx].Description}");
+            });
         }
 
         Destroy(buttonTemplate);
