@@ -44,17 +44,17 @@ public class UIManager : MonoBehaviour
     {
         lifeText.text = "Life : " + count;
     }
-
-    public void UpdateCrossHairPosition(Vector3 worldPosition)
-    {
-        crosshair.UpdatePosition(worldPosition);
-    }
     
     public void UpdateHealthText(float health)
     {
         healthText.text = Mathf.Floor(health).ToString();
     }
     
+    public void UpdateCrossHairPosition(Vector3 worldPosition)
+    {
+        crosshair.UpdatePosition(worldPosition);
+    }
+
     public void SetActiveCrosshair(bool active)
     {
         crosshair.SetActiveCrosshair(active);

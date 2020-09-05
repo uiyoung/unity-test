@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController _characterController;
     private PlayerInput _playerInput;
+    private PlayerShooter _playerShooter;
+
     private Animator _anim;
     private Camera _followCam;
 
@@ -33,16 +35,16 @@ public class PlayerMovement : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
+        _playerShooter = GetComponent<PlayerShooter>();
         _anim = GetComponent<Animator>();
         _followCam = Camera.main;
-
     }
 
     private void FixedUpdate()
     {
         // 플레이어가 속도를 내거나 무기를 사용할 때 플레이어가 카메라 방향으로 회전
         // 플레이어가 멈춰있어서 0.2보다 작으면 마우스를 회전시켜도 플레이어가 카메라 방향으로 회전하지 않아 플레이어를 살펴볼수있다.
-        if (CurrentSpeed > 0.2f || _playerInput.Fire)
+        if (CurrentSpeed > 0.2f || _playerInput.Fire || _playerShooter.State == PlayerShooter.AimState.HipFire)
             Rotate();
 
         Move(_playerInput.MoveInput);

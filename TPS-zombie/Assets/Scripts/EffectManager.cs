@@ -2,13 +2,14 @@
 
 public class EffectManager : MonoBehaviour
 {
-    private static EffectManager m_Instance;
+    private static EffectManager s_Instance;
     public static EffectManager Instance
     {
         get
         {
-            if (m_Instance == null) m_Instance = FindObjectOfType<EffectManager>();
-            return m_Instance;
+            if (s_Instance == null)
+                s_Instance = FindObjectOfType<EffectManager>();
+            return s_Instance;
         }
     }
 
@@ -17,12 +18,20 @@ public class EffectManager : MonoBehaviour
         Common,
         Flesh
     }
-    
+
     public ParticleSystem commonHitEffectPrefab;
     public ParticleSystem fleshHitEffectPrefab;
-    
+
     public void PlayHitEffect(Vector3 pos, Vector3 normal, Transform parent = null, EffectType effectType = EffectType.Common)
     {
+        ParticleSystem targetPrefab = commonHitEffectPrefab;
+        if (effectType == EffectType.Flesh)
+            targetPrefab = fleshHitEffectPrefab;
 
+        ParticleSystem effect = Instantiate(targetPrefab, pos, Quaternion.LookRotation(normal));
+        if (parent != null)
+            effect.transform.SetParent(parent);
+
+        effect.Play();
     }
 }
