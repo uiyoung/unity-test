@@ -2,38 +2,40 @@
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    private static GameManager s_instance;
     
     public static GameManager Instance
     {
         get
         {
-            if (instance == null) instance = FindObjectOfType<GameManager>();
+            if (s_instance == null) 
+                s_instance = FindObjectOfType<GameManager>();
             
-            return instance;
+            return s_instance;
         }
     }
 
-    private int score;
-    public bool isGameover { get; private set; }
+    private int _score;
+    public bool IsGameover { get; private set; }
 
     private void Awake()
     {
-        if (Instance != this) Destroy(gameObject);
+        if (Instance != this) 
+            Destroy(gameObject);
     }
     
     public void AddScore(int newScore)
     {
-        if (!isGameover)
+        if (!IsGameover)
         {
-            score += newScore;
-            UIManager.Instance.UpdateScoreText(score);
+            _score += newScore;
+            UIManager.Instance.UpdateScoreText(_score);
         }
     }
     
     public void EndGame()
     {
-        isGameover = true;
+        IsGameover = true;
         UIManager.Instance.SetActiveGameoverUI(true);
     }
 }

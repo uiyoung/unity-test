@@ -8,7 +8,6 @@ public static class Utility
         var randomPos = Random.insideUnitSphere * distance + center;
         
         NavMeshHit hit;
-        
         NavMesh.SamplePosition(randomPos, out hit, distance, areaMask);
         
         return hit.position;
