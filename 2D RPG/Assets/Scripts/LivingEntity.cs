@@ -4,14 +4,13 @@ using UnityEngine;
 
 public abstract class LivingEntity : MonoBehaviour
 {
-    protected float speed = 2f;
+    [SerializeField] protected float speed = 2f;
     protected Vector2 direction;
     protected Vector2 lastDirection;
 
     private Animator _anim;
 
-
-    void Start()
+    protected virtual void Start()
     {
         _anim = GetComponent<Animator>();
     }
@@ -28,14 +27,14 @@ public abstract class LivingEntity : MonoBehaviour
         if (direction.x != 0 || direction.y != 0)
         {
             UpdateAnimation(direction);
-            //_anim.SetBool("IsMoving", true);
+            _anim.SetBool("IsMoving", true);
             lastDirection = direction;
         }
         else
         {
-            //_anim.SetFloat("LastDirX", lastDirection.x);
-            //_anim.SetFloat("LastDirY", lastDirection.y);
-            //_anim.SetBool("IsMoving", false);
+            _anim.SetFloat("LastDirX", lastDirection.x);
+            _anim.SetFloat("LastDirY", lastDirection.y);
+            _anim.SetBool("IsMoving", false);
         }
 
     }
