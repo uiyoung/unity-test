@@ -1,22 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class FollowCamera : MonoBehaviour
+namespace RPG.Core
 {
-   [SerializeField] private Transform target;
-    //float distance;
-
-    void Start()
+    public class FollowCamera : MonoBehaviour
     {
-        //distance = Mathf.Abs(target.position.y - transform.position.y);
-    }
+        [SerializeField] private Transform target;
+        //float distance;
 
-    void LateUpdate()
-    {
+        void Start()
+        {
+            //distance = Mathf.Abs(target.position.y - transform.position.y);
+        }
 
-        //transform.position = target.position + new Vector3(0, distance, 0);
+        void LateUpdate()
+        {
+            //transform.position = target.position + new Vector3(0, distance, 0);
 
-        transform.position = target.position;
-    }
+            transform.position = target.position;
+        }
+    } 
 }
