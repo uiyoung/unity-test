@@ -38,7 +38,6 @@ public class Player : LivingEntity
         }
 
         Vector2 moveVector;
-
         moveVector.x = Input.GetAxisRaw("Horizontal");
         moveVector.y = Input.GetAxisRaw("Vertical");
 

@@ -8,41 +8,57 @@ public abstract class LivingEntity : MonoBehaviour
     protected Vector2 direction;
     protected Vector2 lastDirection;
 
+    public bool IsMoving => direction.x != 0 || direction.y != 0;
+    private Rigidbody2D _rb;
     private Animator _anim;
+
 
     protected virtual void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
 
     protected virtual void Update()
+    {
+        HandleLayers();
+    }
+
+    private void FixedUpdate()
     {
         Move();
     }
 
     protected virtual void Move()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        _rb.velocity = direction.normalized * speed;
+    }
 
-        if (direction.x != 0 || direction.y != 0)
+    public void HandleLayers()
+    {
+        if (IsMoving)
         {
-            UpdateAnimation(direction);
-            _anim.SetBool("IsMoving", true);
+            ActivateLayer("WalkLayer");
+            _anim.SetFloat("DirX", direction.x);
+            _anim.SetFloat("DirY", direction.y);
+
             lastDirection = direction;
         }
         else
         {
-            _anim.SetFloat("LastDirX", lastDirection.x);
-            _anim.SetFloat("LastDirY", lastDirection.y);
-            _anim.SetBool("IsMoving", false);
+            ActivateLayer("IdleLayer");
+            //_anim.SetFloat("LastDirX", lastDirection.x);
+            //_anim.SetFloat("LastDirY", lastDirection.y);
         }
-
     }
 
-    protected virtual void UpdateAnimation(Vector2 dir)
+    public void ActivateLayer(string layerName)
     {
+        for (int i = 0; i < _anim.layerCount; i++)
+        {
+            _anim.SetLayerWeight(i, 0);
+        }
 
-        _anim.SetFloat("DirX", direction.x);
-        _anim.SetFloat("DirY", direction.y);
+        _anim.SetLayerWeight(_anim.GetLayerIndex(layerName), 1);
     }
 }
