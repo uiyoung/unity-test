@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using RPG.Combat;
+using TMPro;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace RPG.Movement
@@ -19,9 +21,21 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
+        public void StartMoveAction(Vector3 destination)
+        {
+            GetComponent<Fighter>().Cancel();
+            MoveTo(destination);
+        }
+
         public void MoveTo(Vector3 destination)
         {
+            _nma.isStopped = false;
             _nma.destination = destination;
+        }
+
+        public void Stop()
+        {
+            _nma.isStopped = true;
         }
 
         private void UpdateAnimator()
