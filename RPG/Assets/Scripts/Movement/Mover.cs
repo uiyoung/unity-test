@@ -1,11 +1,10 @@
-﻿using RPG.Combat;
-using TMPro;
+﻿using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IAction
     {
         private NavMeshAgent _nma;
         private Animator _anim;
@@ -23,7 +22,7 @@ namespace RPG.Movement
 
         public void StartMoveAction(Vector3 destination)
         {
-            GetComponent<Fighter>().Cancel();
+            GetComponent<ActionScheduler>().StartAction(this);
             MoveTo(destination);
         }
 
@@ -33,7 +32,7 @@ namespace RPG.Movement
             _nma.destination = destination;
         }
 
-        public void Stop()
+        public void Cancel()
         {
             _nma.isStopped = true;
         }
