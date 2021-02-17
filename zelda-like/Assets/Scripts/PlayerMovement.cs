@@ -6,12 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D _rb;
+    private Animator _anim;
     private Vector3 _change;
+    private bool _isMoving;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        
+        _anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -21,12 +23,25 @@ public class PlayerMovement : MonoBehaviour
         _change.y = Input.GetAxisRaw("Vertical");
 
         if (_change != Vector3.zero)
+        {
             MoveCharacter();
-        //transform.Translate(new Vector3(_change.x, _change.y, 0) * Time.deltaTime * speed);
+            UpdateAnimation();
+            _isMoving = true;
+        }
+        else
+            _isMoving = false;
+
+        _anim.SetBool("isMoving", _isMoving);
     }
 
     private void MoveCharacter()
     {
         _rb.MovePosition(transform.position + _change.normalized * speed * Time.deltaTime);
+    }
+
+    private void UpdateAnimation()
+    {
+        _anim.SetFloat("moveX", _change.x);
+        _anim.SetFloat("moveY", _change.y);
     }
 }
