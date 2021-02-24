@@ -20,9 +20,10 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public Count wallCount = new Count(5, 9);
-    public Count foodCount = new Count(1, 5);
+    public Count wallCount = new Count(5, 9);   // 레벨 당 wall 갯수 min, max
+    public Count foodCount = new Count(1, 5);   // 레벨당 food 갯수 min, max
 
+    // 각 타일들에 대한 레퍼런스
     public GameObject[] floorTiles;
     public GameObject[] outerWallTiles;
     public GameObject[] wallTiles;
