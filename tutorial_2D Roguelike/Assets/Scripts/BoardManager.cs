@@ -33,13 +33,14 @@ public class BoardManager : MonoBehaviour
 
     private int columns = 8;
     private int rows = 8;
+    // 타일이 놓일 수 있는 장소의 리스트
     private List<Vector3> gridPositions = new List<Vector3>();
   
     private void InitializeList()
     {
         gridPositions.Clear();
 
-        // x=0, x=columns-1, y=0, y=rows-1에는 오브젝트를 두지 않는다.
+        // x=0, x=columns-1, y=0, y=rows-1에는 오브젝트(벽, 적, 음식, 소다)를 두지 않는다.
         for (int y = 1; y < rows-1; y++)
             for (int x = 1; x < columns-1; x++)
                 gridPositions.Add(new Vector3(x, y, 0f));
@@ -47,6 +48,7 @@ public class BoardManager : MonoBehaviour
 
     private void BoardSetup()
     {
+        // 새 Board 오브젝트를 인스턴스화하고 그 트랜스폼을 보드홀더에 저장
         GameObject boardHolder = new GameObject("Board");
         GameObject go;
 
@@ -54,8 +56,10 @@ public class BoardManager : MonoBehaviour
         {
             for (int x = -1; x < columns + 1; x++)
             {
+                // 위치가 테두리인 경우 외벽 타일중 랜덤으로 하나 골라 저장
                 if (y == -1 || x == -1 || y == rows || x == columns)
                     go = outerWallTiles[Random.Range(0, outerWallTiles.Length - 1)];
+                // 바닥타일 8종 중 하나를 랜덤으로 지정
                 else
                     go = floorTiles[Random.Range(0, floorTiles.Length - 1)];
 
@@ -95,14 +99,16 @@ public class BoardManager : MonoBehaviour
     {
         InitializeList();
         BoardSetup();
-
+        
+        // food 타일 세팅
         PlaceObjects(foodTiles, foodCount.minimum, foodCount.maximum);
+        // wall 타일 세팅
         PlaceObjects(wallTiles, wallCount.minimum, wallCount.maximum);
-
-        int enemyCount = (int)Mathf.Log(level, 2f);
+        // enemy 세팅
+        int enemyCount = (int)Mathf.Log(level, 2f); // 로그함수로 레벨별 적 생성(레벨2:적1, 레벨4:적2, 레벨8:적3)
         enemyCount = Mathf.Clamp(enemyCount, 0, (columns - 4) * (rows - 4));
         PlaceObjects(enemyTiles, enemyCount, enemyCount);
-
+        // exit 세팅
         Instantiate(exitTile, new Vector3(rows - 1, columns - 1, 0), Quaternion.identity);
     }
 }
