@@ -1,76 +1,55 @@
 fileFormatVersion: 2
-guid: 64db38352ded60f4c96f3f5058d27c56
+guid: 5bbf269be2900fd45b010e727366db3e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5034061168752090764
-    second: log_0
+      213: -5309146300846046524
+    second: character_melee_modifid_0
   - first:
-      213: -8771329076928401280
-    second: log_1
+      213: -5862275866910621939
+    second: character_melee_modifid_1
   - first:
-      213: 2376815873980901129
-    second: log_2
+      213: -4232090636731403013
+    second: character_melee_modifid_2
   - first:
-      213: -1512028583440225198
-    second: log_3
+      213: -6198274056990418285
+    second: character_melee_modifid_3
   - first:
-      213: 8213902188476598959
-    second: log_4
+      213: 81337581599014740
+    second: character_melee_modifid_4
   - first:
-      213: -22439546833456996
-    second: log_5
+      213: 8501742416814491945
+    second: character_melee_modifid_5
   - first:
-      213: -451413936476517383
-    second: log_6
+      213: 2042562249008907430
+    second: character_melee_modifid_6
   - first:
-      213: 8458950633466780684
-    second: log_7
+      213: -2945398928608638586
+    second: character_melee_modifid_7
   - first:
-      213: 3059174765694063163
-    second: log_8
+      213: -4047261984019641450
+    second: character_melee_modifid_8
   - first:
-      213: -34017176892466219
-    second: log_9
+      213: -3249374537714542246
+    second: character_melee_modifid_9
   - first:
-      213: -5690133823277906687
-    second: log_10
+      213: -7725747858037563338
+    second: character_melee_modifid_10
   - first:
-      213: -2570500000468905864
-    second: log_11
+      213: -7295459370018210664
+    second: character_melee_modifid_11
   - first:
-      213: 8498479158080882289
-    second: log_12
+      213: 6149767459257209777
+    second: character_melee_modifid_12
   - first:
-      213: -6457386710923275188
-    second: log_13
+      213: -863242609362251904
+    second: character_melee_modifid_13
   - first:
-      213: 681774289175886536
-    second: log_14
+      213: 3167995598525450292
+    second: character_melee_modifid_14
   - first:
-      213: 2703527186074568732
-    second: log_15
-  - first:
-      213: 3107883342233372815
-    second: log_16
-  - first:
-      213: -822619953307990688
-    second: log_17
-  - first:
-      213: -128083769461270964
-    second: log_18
-  - first:
-      213: -3791062316690792145
-    second: log_19
-  - first:
-      213: -2086765476746818828
-    second: log_20
-  - first:
-      213: 5566842953363755866
-    second: log_21
-  - first:
-      213: -7445369939883215787
-    second: log_22
+      213: -4976986084889993047
+    second: character_melee_modifid_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -134,7 +113,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -146,7 +125,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -160,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: log_0
+      name: character_melee_modifid_0
       rect:
         serializedVersion: 2
         x: 0
@@ -168,20 +147,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 471a1f2e90c632ab0800000000000000
-      internalID: -5034061168752090764
+      spriteID: 4c20e75819f1256b0800000000000000
+      internalID: -5309146300846046524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_1
+      name: character_melee_modifid_1
       rect:
         serializedVersion: 2
         x: 32
@@ -189,20 +168,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 080b0a15daaf54680800000000000000
-      internalID: -8771329076928401280
+      spriteID: d0f7271a82305aea0800000000000000
+      internalID: -5862275866910621939
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_2
+      name: character_melee_modifid_2
       rect:
         serializedVersion: 2
         x: 64
@@ -210,20 +189,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9072429c1752cf020800000000000000
-      internalID: 2376815873980901129
+      spriteID: bf43e5c0df79445c0800000000000000
+      internalID: -4232090636731403013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_3
+      name: character_melee_modifid_3
       rect:
         serializedVersion: 2
         x: 96
@@ -231,62 +210,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25ceec1b302340be0800000000000000
-      internalID: -1512028583440225198
+      spriteID: 39a1194c59e4bf9a0800000000000000
+      internalID: -6198274056990418285
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: faa83f37584adf170800000000000000
-      internalID: 8213902188476598959
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: log_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c90321ed95740bff0800000000000000
-      internalID: -22439546833456996
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: log_6
+      name: character_melee_modifid_4
       rect:
         serializedVersion: 2
         x: 0
@@ -294,20 +231,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fb08ad9a614cb9f0800000000000000
-      internalID: -451413936476517383
+      spriteID: 45f391a7918f02100800000000000000
+      internalID: 81337581599014740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_7
+      name: character_melee_modifid_5
       rect:
         serializedVersion: 2
         x: 32
@@ -315,20 +252,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0c5a50a8ca346570800000000000000
-      internalID: 8458950633466780684
+      spriteID: 92949161fa14cf570800000000000000
+      internalID: 8501742416814491945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_8
+      name: character_melee_modifid_6
       rect:
         serializedVersion: 2
         x: 64
@@ -336,20 +273,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b32980fbd3f547a20800000000000000
-      internalID: 3059174765694063163
+      spriteID: 6a48cc32b83a85c10800000000000000
+      internalID: 2042562249008907430
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_9
+      name: character_melee_modifid_7
       rect:
         serializedVersion: 2
         x: 96
@@ -357,62 +294,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5db101fce85278ff0800000000000000
-      internalID: -34017176892466219
+      spriteID: 6894772a747df17d0800000000000000
+      internalID: -2945398928608638586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_10
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 105c5137f659801b0800000000000000
-      internalID: -5690133823277906687
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: log_11
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 870d8e06edfb35cd0800000000000000
-      internalID: -2570500000468905864
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: log_12
+      name: character_melee_modifid_8
       rect:
         serializedVersion: 2
         x: 0
@@ -420,20 +315,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 176c87474c9a0f570800000000000000
-      internalID: 8498479158080882289
+      spriteID: 69b01993bac35d7c0800000000000000
+      internalID: -4047261984019641450
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_13
+      name: character_melee_modifid_9
       rect:
         serializedVersion: 2
         x: 32
@@ -441,20 +336,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c441716cff0c266a0800000000000000
-      internalID: -6457386710923275188
+      spriteID: a595359e217e7e2d0800000000000000
+      internalID: -3249374537714542246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_14
+      name: character_melee_modifid_10
       rect:
         serializedVersion: 2
         x: 64
@@ -462,20 +357,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cab2539a16267900800000000000000
-      internalID: 681774289175886536
+      spriteID: 630af618141a8c490800000000000000
+      internalID: -7725747858037563338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_15
+      name: character_melee_modifid_11
       rect:
         serializedVersion: 2
         x: 96
@@ -483,62 +378,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c18069ed6abd48520800000000000000
-      internalID: 2703527186074568732
+      spriteID: 89cf4c02b5251ca90800000000000000
+      internalID: -7295459370018210664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_16
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f888c29fe6b612b20800000000000000
-      internalID: 3107883342233372815
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: log_17
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 065cde9c2877594f0800000000000000
-      internalID: -822619953307990688
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: log_18
+      name: character_melee_modifid_12
       rect:
         serializedVersion: 2
         x: 0
@@ -546,20 +399,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4694c38d74f83ef0800000000000000
-      internalID: -128083769461270964
+      spriteID: 1b3584cdbec585550800000000000000
+      internalID: 6149767459257209777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_19
+      name: character_melee_modifid_13
       rect:
         serializedVersion: 2
         x: 32
@@ -567,77 +420,56 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f21a64ca8e0736bc0800000000000000
-      internalID: -3791062316690792145
+      spriteID: 08f4bf1ab652504f0800000000000000
+      internalID: -863242609362251904
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_20
+      name: character_melee_modifid_14
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.53125, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fa05f4ead15a03e0800000000000000
-      internalID: -2086765476746818828
+      spriteID: 4384c1c463bf6fb20800000000000000
+      internalID: 3167995598525450292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: log_21
+      name: character_melee_modifid_15
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5625, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5312a3fb26614d40800000000000000
-      internalID: 5566842953363755866
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: log_22
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 554b3e7ac7bbca890800000000000000
-      internalID: -7445369939883215787
+      spriteID: 9a0e11666813eeab0800000000000000
+      internalID: -4976986084889993047
       vertices: []
       indices: 
       edges: []
