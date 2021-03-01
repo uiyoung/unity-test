@@ -14,5 +14,6 @@ public class Pot : MonoBehaviour
     public void Smash()
     {
         _anim.SetTrigger("Hit");
+        Destroy(gameObject, 0.5f);
     }
 }

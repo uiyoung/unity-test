@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum PlayerState
 {
+    idle,
     walk,
     attack,
-    interact
+    interact,
+    stagger
 }
 
 public class PlayerMovement : MonoBehaviour
 {
-
     public float speed;
     private Rigidbody2D _rb;
     private Animator _anim;
     private Vector3 _change;
-    private PlayerState _currentState;
+    public PlayerState currentState;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
 
-        _currentState = PlayerState.walk;
+        currentState = PlayerState.walk;
         _anim.SetFloat("moveX", 0f);
         _anim.SetFloat("moveY", -1f);
     }
@@ -33,9 +34,9 @@ public class PlayerMovement : MonoBehaviour
         _change.x = Input.GetAxisRaw("Horizontal");
         _change.y = Input.GetAxisRaw("Vertical");
 
-        if (_currentState == PlayerState.walk)
+        if (currentState == PlayerState.walk || currentState == PlayerState.idle)
             UpdateAnimationAndMove();
-        if (Input.GetButton("Attack") && _currentState != PlayerState.attack)
+        if (Input.GetButton("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger) 
             StartCoroutine(AttackCoroutine());
     }
 
@@ -52,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
             _anim.SetBool("isMoving", false);
     }
 
-
     private void MoveCharacter()
     {
         _rb.MovePosition(transform.position + _change.normalized * speed * Time.deltaTime);
@@ -61,10 +61,23 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator AttackCoroutine()
     {
         _anim.SetBool("isAttacking", true);
-        _currentState = PlayerState.attack;
+        currentState = PlayerState.attack;
         yield return null;
         _anim.SetBool("isAttacking", false);
         yield return new WaitForSeconds(0.3f);  // 공격속도
-        _currentState = PlayerState.walk;
+        currentState = PlayerState.walk;
+    }
+
+    public void KnockBack(float knockTime)
+    {
+        StartCoroutine(KnockBackCoroutine(knockTime));
+    }
+
+    private IEnumerator KnockBackCoroutine(float knockTime)
+    {
+        yield return new WaitForSeconds(knockTime);
+        _rb.velocity = Vector2.zero;
+        currentState = PlayerState.idle;
+        _rb.velocity = Vector2.zero;
     }
 }
