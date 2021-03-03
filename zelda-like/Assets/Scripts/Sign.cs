@@ -14,7 +14,7 @@ public class Sign : MonoBehaviour
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.Space))
         {
             //대화 상자가 이미 열려있는 경우 닫기
-            if (dialogueBox.activeSelf)
+            if (dialogueBox.activeInHierarchy)
                 dialogueBox.SetActive(false);
             else
             {
