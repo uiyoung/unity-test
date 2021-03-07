@@ -13,10 +13,13 @@ public enum PlayerState
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
+    public PlayerState currentState;
+    public FloatValue currentHealth;
+    public Signal playerHealthSignal;
+
     private Rigidbody2D _rb;
     private Animator _anim;
     private Vector3 _change;
-    public PlayerState currentState;
 
     void Start()
     {
@@ -36,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (currentState == PlayerState.walk || currentState == PlayerState.idle)
             UpdateAnimationAndMove();
-        if (Input.GetButton("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger) 
+        if (Input.GetButton("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
             StartCoroutine(AttackCoroutine());
     }
 
@@ -68,9 +71,13 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
     }
 
-    public void KnockBack(float knockTime)
+    public void KnockBack(float knockTime, float damage)
     {
-        StartCoroutine(KnockBackCoroutine(knockTime));
+        if (currentHealth.initialValue > 0)
+        {
+            currentHealth.initialValue -= damage;
+            StartCoroutine(KnockBackCoroutine(knockTime));
+        }
     }
 
     private IEnumerator KnockBackCoroutine(float knockTime)
