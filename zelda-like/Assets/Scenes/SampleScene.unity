@@ -7990,7 +7990,6 @@ GameObject:
   - component: {fileID: 969704465}
   - component: {fileID: 969704463}
   - component: {fileID: 969704461}
-  - component: {fileID: 969704464}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8149,21 +8148,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &969704464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969704457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71abc7198fd13994098acd1f378cfd8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrust: 2
-  knockTime: 0.4
-  damage: 0.5
 --- !u!61 &969704465
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8174,10 +8158,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0023933947, y: -0.13358662}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8188,7 +8172,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.50696284, y: 0.8981573}
+  m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!1 &1023407821
 GameObject:
@@ -12226,7 +12210,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.028106928, y: -0.4718932}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -12295,7 +12279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2
   knockTime: 0.3
-  damage: 0
+  damage: 1
 --- !u!1 &1289123167
 GameObject:
   m_ObjectHideFlags: 0
@@ -16302,6 +16286,7 @@ MonoBehaviour:
   halfFullHeart: {fileID: -3276687688264177478, guid: 41b1afc36ff8bd9408037bcfd0bd28a5, type: 3}
   emptyHeart: {fileID: -9053378900703536071, guid: 41b1afc36ff8bd9408037bcfd0bd28a5, type: 3}
   heartContainers: {fileID: 11400000, guid: 22aca52ae9d00db478f0dd5c537de17d, type: 2}
+  playerCurrentHealth: {fileID: 11400000, guid: b7f5720adb97a084baa6f67b2575a250, type: 2}
 --- !u!114 &1701077659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24441,7 +24426,19 @@ MonoBehaviour:
   signal: {fileID: 11400000, guid: f589d27e895f91942950adf3617ba342, type: 2}
   signalEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1701077658}
+        m_TargetAssemblyTypeName: HeartManager, Assembly-CSharp
+        m_MethodName: UpdateHeart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &2020414750
 MonoBehaviour:
   m_ObjectHideFlags: 0

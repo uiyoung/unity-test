@@ -10,11 +10,10 @@ public class Signal: ScriptableObject
 
     public void Raise()
     {
-        for (int i = listeners.Count; i >= 0; i--)
+        for (int i = listeners.Count - 1; i >= 0; i--)
         {
             listeners[i].OnSignalRaised();
         }
-
     }
 
     public void RegisterListener(SignalListener listener)
